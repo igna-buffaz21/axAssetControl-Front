@@ -1,0 +1,70 @@
+<app-skeleton>
+  <div class="container-fluid p-3">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <!-- Grupo izquierdo: Botón volver y título -->
+      <div class="d-flex align-items-center">
+        <button [routerLink]="['/asset-management/locations']" class="back-button">
+          <i class="arrow-left"></i>
+        </button>
+        <h2 class="titulo-locaciones">Sectores</h2>
+      </div>
+    
+      <!-- Grupo derecho: Filtrar, Buscar y Agregar -->
+      <div class="d-flex align-items-center">
+        <select #sel="ngModel" class="form-select custom-select" [(ngModel)]="filtro" (change)="OrdenarSectores(sel.value)">
+          <option value="" disabled selected>Filtrar</option>
+          <option value="sin">Sin filtro</option>
+          <option value="asc">Ascendente (A-Z)</option>
+          <option value="desc">Descendente (Z-A)</option>
+          <option value="baja">Dados de baja</option>
+        </select>
+        <div class="position-relative me-3">
+          <input [formControl]="searchControl" type="text" class="form-control buscar-input" placeholder="Buscar por nombre...">
+        </div>
+        @if (datosUsuario.role === 'admin') {
+          <button [routerLink]="['/asset-management/add-sector']" class="btn-agregar" aria-label="Agregar locación">
+            <mat-icon>add</mat-icon>
+          </button>
+        }
+      </div>
+    </div>
+  
+    <div class="row g-4" style="margin-top: 10px; height: 100vh;">
+      @if (isLoading) {
+        <div class="d-flex justify-content-center align-items-center my-5">
+          <!-- From Uiverse.io by G4b413l --> 
+          <div class="three-body">
+            <div class="three-body__dot"></div>
+            <div class="three-body__dot"></div>
+            <div class="three-body__dot"></div>
+          </div>
+        </div>
+      }
+      @if (!isLoading) {
+        @for (sector of sectores; track $index) {
+          <div class="col-md-6 col-lg-4">
+            <div [class]="'locacion-card ' + (status ? 'activa' : 'inactiva')" (click)="navegarASubsectores(sector.id)">
+              <h3 class="locacion-titulo">{{ sector.id }}</h3>
+              <div class="locacion-direccion">{{ sector.name }}</div>
+              @if (datosUsuario.role === 'admin') {
+              <div class="card-actions">
+                <button mat-icon-button class="action-button edit-button" (click)="editarSector(sector.id, sector.name); $event.stopPropagation()">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button class="action-button delete-button" (click)="eliminarSectorConConfirmacion(sector.id, sector.name); $event.stopPropagation()">
+                  @if (status) {
+                    <mat-icon>visibility_off</mat-icon>
+                  }
+                  @else {
+                    <mat-icon>visibility_on</mat-icon>
+                  }
+                </button>
+              </div>
+            }
+            </div>
+          </div>
+        }
+      }
+    </div>
+  </div>
+</app-skeleton>

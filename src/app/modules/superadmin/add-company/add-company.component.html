@@ -1,0 +1,44 @@
+<app-skeleton>
+    <!-- location-create.component.html -->
+    <div class="location-create-wrapper">
+        <div class="back-button-container">
+          <button [routerLink]="['/sa/companys-management']" class="back-button" >
+            <i class="arrow-left"></i>
+          </button>
+        </div>
+      
+        <div class="location-create-container">
+          <div class="location-create-card">
+            <h2 class="location-create-title">Crear Nueva Empresa</h2>
+            
+            <form [formGroup]="companyForm" (ngSubmit)="CrearEmpresa()">
+              <div class="input-container">
+                <label for="locationName">Nombre de la empresa</label>
+                <input id="locationName" type="text" class="form-control" formControlName="name" placeholder="Ingrese el nombre">
+                @if(companyForm.get('name')?.invalid && (companyForm.get('name')?.dirty || companyForm.get('name')?.touched)) {
+                  <div class="error-message">
+                    @if(companyForm.get('name')?.errors?.['required']) {
+                      <span>El nombre es obligatorio</span>
+                    }
+                    @if(companyForm.get('name')?.errors?.['minlength']) {
+                      <span>El nombre debe tener al menos 3 caracteres</span>
+                    }
+                  </div>
+                }
+              </div>
+              
+              <div class="button-container">
+                <button type="submit" [disabled]="companyForm.invalid" class="create-button">
+                  @if (!isLoading) {
+                    <span>Crear Usuario</span>
+                  }
+                  @if (isLoading) {
+                    <mat-spinner diameter="24"></mat-spinner>
+                  }  
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </app-skeleton>

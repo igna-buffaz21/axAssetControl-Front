@@ -1,0 +1,66 @@
+<app-skeleton>
+    <div class="container-fluid p-3">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <!-- Grupo izquierdo: Botón volver y título -->
+        <div class="d-flex align-items-center">
+          <button [routerLink]="['/sa/home']" class="back-button">
+            <i class="arrow-left"></i>
+          </button>
+          <h2 class="titulo-locaciones">Gestion de Administradores</h2>
+        </div>
+      
+        <!-- Grupo derecho: Filtrar, Buscar y Agregar -->
+        <div class="d-flex align-items-center">
+          <button class="btn-filtrar" (click)="cambiarStatus()">
+            <mat-icon>{{ mostrarInactivos ? 'visibility  ' : 'visibility_off ' }}</mat-icon>
+          </button>
+          <div class="position-relative me-3">
+              <input [formControl]="searchControl" type="text" class="form-control buscar-input" placeholder="Buscar por nombre...">
+          </div>
+          <button [routerLink]="['/sa/add-user']" class="btn-agregar" aria-label="Agregar locación">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+      </div>
+    
+      <div class="table-wrapper">
+        <table class="table">
+          <thead>
+            <tr class="header-row">
+                <th>ID</th>
+              <th>NOMBRE</th>
+              <th>EMPRESA</th>
+              <th>ESTADO</th>
+              <th>ACCIONES</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (user of users; track $index) {
+              <tr [class.alt-row]="$index % 2 !== 0">
+                <td>{{user.id}}</td>
+                <td>{{ user.name }}</td>
+                <td>{{user.idCompanyNavigation.name}}</td>
+                <td>{{user.status}}</td>
+                <td class="acciones">
+                  <button class="btn-accion btn-editar" (click)="EditarUsuario(user.id, user.name)">
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                  @if (mostrarInactivos) { 
+                    <button class="btn-accion btn-eliminar" (click)="darDeAltaConfirmacion(user.id, user.name)">
+                      <mat-icon>swap_horiz</mat-icon>
+                    </button>
+                  }
+                  @else {
+                    <button class="btn-accion btn-eliminar" (click)="eliminarUsuarioConConfirmacion(user.id, user.name)">
+                      <mat-icon>swap_horiz</mat-icon>
+                    </button>
+                  }
+                  <button class="btn-ir">VER</button>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </app-skeleton>

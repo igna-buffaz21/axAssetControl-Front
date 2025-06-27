@@ -1,0 +1,122 @@
+<app-skeleton>
+    <div class="container-fluid p-3">
+      <div class="d-flex align-items-center mb-3">
+        <!-- Grupo izquierdo: Botón volver, título y selectores -->
+        <div class="d-flex align-items-center flex-grow-1">
+          <button [routerLink]="['/reports/menu']" class="back-button">
+            <i class="arrow-left"></i>
+          </button>
+          <h2 class="titulo-locaciones me-4">Auditorias</h2>
+          
+          <!-- Selectores en la misma línea -->
+          <div class="d-flex align-items-center select-container">
+            <div class="select-wrapper me-2">
+              <select
+              [disabled]="desHabilitarSelectL"
+              [(ngModel)]="selectedLocation"
+              #locacionSelect
+              class="form-select custom-select"
+              (ngModelChange)="CambioLocacion($event)">
+              
+              <option [ngValue]="null" disabled>Locación</option>
+              
+              @for (location of locations; track $index) {
+                <option [ngValue]="location.id">{{ location.name }}</option>
+              }
+            </select>
+            
+            
+            </div>
+            
+            <div class="select-wrapper me-2">
+              <select
+                class="form-select custom-select"
+                [disabled]="desHabilitarSelectS"
+                [(ngModel)]="selectedSector"
+                (change)="CambioSector(selectedSector)"
+              >
+                <option [ngValue]="null" disabled selected>Sector</option>
+              
+                @if (sectors?.length === 0) {
+                  <option disabled>No hay sectores</option>
+                }
+                @else {
+                  @for (sector of sectors; track $index) {
+                    <option [ngValue]="sector.id">{{ sector.name }}</option>
+                  }
+                }
+            </select>
+            
+            </div>
+            
+            <div class="select-wrapper">
+                <select 
+                [disabled]="desHabilitarSelectSS"
+                [(ngModel)]="selectedSubsector"
+                name="subSector"
+                class="form-select custom-select"
+                (ngModelChange)="CambioSubSector($event)">
+                
+                <option [ngValue]="null" disabled>Subsector</option>
+              
+                @if (subsectors?.length == 0) {
+                  <option disabled>No hay subsectores</option>
+                }
+                @else {
+                  @for (subsector of subsectors; track $index) {
+                    <option [ngValue]="subsector.id">{{subsector.name}}</option>
+                  }
+                }
+            </select>
+            
+            </div>
+            <button mat-icon-button color="warn" (click)="resetFiltros()" aria-label="Resetear filtros">
+              <mat-icon>refresh</mat-icon>
+            </button> 
+          </div>
+        </div>
+        
+        <!-- Grupo derecho: Filtrar, Buscar y Agregar -->
+        <div class="d-flex align-items-center">
+          <select #sel="ngModel" class="form-select custom-select" style="margin-right: 10px;" [(ngModel)]="filtro" (change)="OrdenarControles(sel.value);">
+            <option value="" disabled selected>Filtrar</option> \
+            <option value="show_all">Mostrar Todos</option>
+            <option value="completed">Completados</option>
+            <option value="inprogress">En progreso</option>
+          </select>    
+        </div>
+      </div>
+      
+      <div class="table-wrapper">
+        <table class="table">
+          <thead>
+            <tr class="header-row">
+              <th>ID</th>
+              <th>FECHA AUDITORIA</th>
+              <th>ESTADO</th>
+              <th>ACCIONES</th>
+            </tr>
+          </thead>
+          <tbody>
+            @if (historial === null && controlRecord?.length == 0) {
+              <tr>
+                <td colspan="4" class="text-center text-muted">No hay historial para este subsector</td>
+              </tr>      
+            }
+            @else {
+              @for (control of controlRecord; track $index) {
+                <tr>
+                  <td>{{ control.id }}</td>
+                  <td>{{ control.date }}</td>
+                  <td>{{ control.status }}</td>
+                  <td class="acciones">
+                    <button class="btn-ir" (click)="VerInformeDeAuditoria(control.id)">VER INFORME</button>
+                  </td>
+                </tr>
+              }
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </app-skeleton>

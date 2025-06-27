@@ -1,0 +1,227 @@
+/* Barra de navegación */
+.navbar {
+    width: 100%;
+    background-color: #000000 !important;
+    color: white !important;
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    height: 60px;
+    position: relative;
+}
+
+/* Sección izquierda del navbar */
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Botones de navegación - Visible en desktop */
+.nav-buttons-desktop {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.nav-button {
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-weight: 400;
+    font-size: 17px;
+    padding: 0 16px;
+    transition: transform ease 0.3s;
+}
+
+.nav-button:hover {
+    transform: scale(1.10);
+}
+
+/* Botón hamburguesa - Oculto por defecto */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    padding: 8px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+}
+
+/* Menú desplegable móvil - Oculto por defecto */
+.mobile-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #000000;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+
+    &.show {
+        display: block;
+        animation: slideDown 0.3s ease-out;
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.mobile-menu-item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    padding: 16px 24px;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    gap: 12px;
+
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    &:last-child {
+        border-bottom: none;
+    }
+
+    mat-icon {
+        font-size: 20px;
+        width: 20px;
+        height: 20px;
+    }
+
+    span {
+        font-size: 16px;
+    }
+}
+
+/* Espaciador */
+.example-spacer {
+    flex-grow: 1;
+}
+
+/* Sección derecha del navbar */
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Perfil de usuario */
+.user-profile {
+    display: flex;
+    align-items: center;
+}
+
+.user-icon {
+    font-size: 36px;
+    color: white;
+}
+
+/* Tamaño del logo o proyecto */
+.project-name {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+/* Overlay para cerrar el menú al hacer clic fuera */
+.mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 999;
+    animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Media queries para responsive */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 0 0.75rem;
+    }
+
+    /* Ocultar botones desktop */
+    .nav-buttons-desktop {
+        display: none;
+    }
+
+    /* Mostrar botón hamburguesa */
+    .menu-toggle {
+        display: flex;
+    }
+
+    /* Reducir tamaño del proyecto */
+    .project-name {
+        font-size: 1rem;
+    }
+
+    .user-icon {
+        font-size: 32px;
+    }
+
+    .nav-left {
+        gap: 0.5rem;
+    }
+
+    .nav-right {
+        gap: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar {
+        padding: 0 0.5rem;
+    }
+
+    .project-name {
+        font-size: 0.9rem;
+    }
+
+    .user-icon {
+        font-size: 28px;
+    }
+
+    .mobile-menu-item {
+        padding: 14px 20px;
+        font-size: 15px;
+
+        mat-icon {
+            font-size: 18px;
+            width: 18px;
+            height: 18px;
+        }
+    }
+}

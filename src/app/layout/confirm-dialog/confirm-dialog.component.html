@@ -1,0 +1,13 @@
+    <div style="border-radius: 10px;">
+        <h2 mat-dialog-title>{{data.title}}</h2>
+        <mat-dialog-content>
+          {{ data.message }}
+        </mat-dialog-content>
+        <mat-dialog-actions align="end">
+          <button style="border-radius: 10px; background-color: transparent;" mat-button mat-dialog-close>Cancelar</button>
+          <button style="border-radius: 10px;" mat-flat-button color="warn" [mat-dialog-close]="true">{{data.input}}</button>
+        </mat-dialog-actions>
+    </div>
+
+
+

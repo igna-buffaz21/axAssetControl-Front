@@ -1,0 +1,98 @@
+<app-skeleton>
+    <!-- location-create.component.html -->
+    <div class="location-create-wrapper">
+        <div class="back-button-container">
+          <button [routerLink]="['/users-management/']" class="back-button" >
+            <i class="arrow-left"></i>
+          </button>
+        </div>
+      
+        <div class="location-create-container">
+          <div class="location-create-card">
+            <h2 class="location-create-title">Agregar Usuario</h2>
+            
+            <form [formGroup]="locationForm" (ngSubmit)="CrearUsuario()">
+              <div class="form-grid">
+                
+              <div class="input-container">
+                <label for="locationName">Nombre del Usuario</label>
+                <input id="name" type="text" class="form-control" formControlName="name" placeholder="Ingrese el nombre">
+                @if(locationForm.get('name')?.invalid && (locationForm.get('name')?.dirty || locationForm.get('name')?.touched)) {
+                  <div class="error-message">
+                    @if(locationForm.get('name')?.errors?.['required']) {
+                      <span>El nombre es obligatorio</span>
+                    }
+                    @if(locationForm.get('name')?.errors?.['minlength']) {
+                      <span>El nombre debe tener al menos 3 caracteres</span>
+                    }
+                  </div>
+                }
+              </div>
+
+              <div class="input-container">
+                <label for="locationName">Correo Electronico</label>
+                <input id="email" type="email" class="form-control" formControlName="email" placeholder="Ingrese el Correo Electronico">
+                @if(locationForm.get('email')?.invalid && (locationForm.get('email')?.dirty || locationForm.get('email')?.touched)) {
+                  <div class="error-message">
+                    @if(locationForm.get('email')?.errors?.['required']) {
+                      <span>El correo electronico es obligatorio</span>
+                    }
+                    @else if(locationForm.get('email')?.errors?.['minlength']) {
+                      <span>El nombre debe tener al menos 3 caracteres</span>
+                    }
+                    @else if(locationForm.get('email')?.errors?.['email']) {
+                      <span>El formato del correo no es válido</span>
+                    }
+                  </div>
+                }
+              </div>
+
+              <div class="input-container">
+                <label for="locationName">Contraseña</label>
+                <input id="password" type="text" class="form-control" formControlName="password" placeholder="Ingrese la contraseña">
+                @if(locationForm.get('password')?.invalid && (locationForm.get('password')?.dirty || locationForm.get('password')?.touched)) {
+                  <div class="error-message">
+                    @if(locationForm.get('password')?.errors?.['required']) {
+                      <span>La contraseñá es obligatorio</span>
+                    }
+                    @if(locationForm.get('password')?.errors?.['minlength']) {
+                      <span>La contraseñá debe tener al menos 5 caracteres</span>
+                    }
+                  </div>
+                }
+              </div>
+
+              <div class="input-container">
+                <label for="rol">Rol</label>
+                <select id="rol" class="form-control" formControlName="rol">
+                  <option value="" selected disabled>Seleccione un rol</option>
+                  <option value="admin">Administrador</option>
+                  <option value="operator">Operador</option>
+                </select>
+                @if(locationForm.get('rol')?.invalid && (locationForm.get('rol')?.dirty || locationForm.get('rol')?.touched)) {
+                  <div class="error-message">
+                    @if(locationForm.get('rol')?.errors?.['required']) {
+                      <span>El rol es obligatorio</span>
+                    }
+                  </div>
+                }
+              </div>    
+              
+              
+              
+              <div class="button-container">
+                <button type="submit" [disabled]="locationForm.invalid" class="create-button">
+                  @if (!isLoading) {
+                    <span>Crear Usuario</span>
+                  }
+                  @if (isLoading) {
+                    <mat-spinner diameter="24"></mat-spinner>
+                  }
+                </button>
+            </div>
+            </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </app-skeleton>

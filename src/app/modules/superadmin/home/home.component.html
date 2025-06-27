@@ -1,0 +1,13 @@
+<app-skeleton>
+    <div class="welcome-container">
+      <div class="welcome-card">
+        <h1 class="welcome-title">Panel SuperAdmin</h1>
+        
+        <div class="button-container">
+          <button [routerLink]="['/sa/companys-management']" class="custom-button">Gestion Empresas</button>
+          <button [routerLink]="['/sa/users-management']" class="custom-button">Gestion Administradores</button>
+          <button (click)="logOut()" class="custom-button">Cerrar Sesion</button>
+        </div>
+      </div>
+    </div>
+</app-skeleton>

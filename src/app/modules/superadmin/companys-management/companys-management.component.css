@@ -1,0 +1,643 @@
+:host {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.container-fluid {
+  min-height: 100%;
+  height: 100%;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+
+  /* Responsive padding */
+  @media (max-width: 768px) {
+    padding: 0.75rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.5rem;
+  }
+}
+
+/* Encabezado */
+.titulo-locaciones {
+  color: #000000;
+  font-weight: 600;
+  font-size: 1.8rem;
+  margin: 0;
+  padding: 0;
+  line-height: 1.2;
+  margin-left: 0.5rem;
+
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+    margin-left: 0.25rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.3rem;
+    margin-left: 0.25rem;
+  }
+}
+
+/* Header responsive - MEJORADO */
+.d-flex.justify-content-between.align-items-center.mb-3 {
+  /* Solo cuando realmente no hay espacio se mueven hacia abajo */
+  @media (max-width: 900px) {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center; /* Centrado */
+  }
+
+  @media (max-width: 768px) {
+    gap: 0.75rem;
+  }
+}
+
+/* Grupo izquierdo - SIEMPRE JUNTOS Y CENTRADO */
+.d-flex.align-items-center:first-child {
+  /* El botón y título siempre permanecen juntos */
+  flex-shrink: 0;
+  
+  @media (max-width: 900px) {
+    justify-content: center; /* Centrado */
+    align-self: center; /* Centrado */
+  }
+}
+
+/* Grupo derecho responsive - MEJORADO Y CENTRADO */
+.d-flex.align-items-center:last-child {
+  /* Mantiene flexbox hasta pantallas más pequeñas */
+  @media (max-width: 900px) {
+    display: flex;
+    justify-content: center; /* Centrado */
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+  }
+
+  /* Solo usa grid en pantallas realmente pequeñas */
+  @media (max-width: 600px) {
+    display: grid;
+    grid-template-columns: auto auto 1fr auto;
+    grid-template-areas: "filtrar select buscar agregar";
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center; /* Centrado del grid */
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: auto auto 1fr auto;
+    gap: 0.3rem;
+  }
+}
+
+/* Botón volver */
+.back-button {
+  background-color: #ffffffc8;
+  border: none;
+  width: 35px;
+  height: 35px;
+  border-radius: 10px;
+  margin-right: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.15);
+    transform: translateX(-2px);
+  }
+}
+
+.arrow-left {
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-top: 2px solid #000000;
+  border-left: 2px solid #000000;
+  transform: rotate(-45deg);
+}
+
+/* Select filtrar - MEJORADO */
+.custom-select {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 120px;
+  width: 180px;
+  margin-right: 20px;
+  animation: border-color 0.3s ease;
+
+  @media (max-width: 600px) {
+    width: auto;
+    margin-right: 2px;
+    grid-area: select;
+    min-width: 100px;
+    padding: 6px 8px;
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: 480px) {
+    min-width: 90px;
+    padding: 6px 6px;
+    font-size: 0.8rem;
+  }
+}
+
+.custom-select:focus {
+  border-color: #000000;
+  outline: none;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+.custom-select:disabled {
+  background-color: #e9ecef;
+  color: #6c757d;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* Botón agregar */
+.btn-agregar {
+  background-color: #ffffffc8;
+  color: #000000;
+  border-radius: 10px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+
+  .mat-icon {
+    font-size: 20px;
+    font-weight: 500;
+  }
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.15);
+    transform: translateX(-2px);
+  }
+
+  @media (max-width: 600px) {
+    grid-area: agregar;
+    width: 36px;
+    height: 36px;
+
+    .mat-icon {
+      font-size: 18px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    width: 34px;
+    height: 34px;
+
+    .mat-icon {
+      font-size: 16px;
+    }
+  }
+}
+
+/* Botón filtrar */
+.btn-filtrar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  padding: 6px 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  flex-shrink: 0;
+  margin-right: 10px;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.08);
+    transform: translateX(-1px); 
+  }
+
+  &:active {
+    transform: scale(0.98); 
+  }
+
+  @media (max-width: 600px) {
+    margin-right: 0 !important;
+    grid-area: filtrar;
+    padding: 4px 6px;
+  }
+}
+
+/* Buscador - MEJORADO */
+.buscar-input {
+  border-radius: 10px;
+  border: 1px solid #e0e0e0;
+  padding: 8px 12px;
+  background-color: white;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  width: 180px;
+  animation: border-color 0.3s ease;
+
+
+  &:focus {
+    border-color: #000000;
+    box-shadow: 0 2px 8px rgba(114, 28, 67, 0.1);
+    outline: none;
+  }
+
+  @media (max-width: 600px) {
+    width: 100%;
+    min-width: 140px;
+    padding: 6px 10px;
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 480px) {
+    min-width: 100px;
+    padding: 6px 8px;
+    font-size: 0.85rem;
+  }
+}
+
+/* Contenedor del buscador */
+.position-relative.me-3 {
+  flex: 1;
+  max-width: 200px;
+
+  @media (max-width: 600px) {
+    grid-area: buscar;
+    margin-right: 0 !important;
+    max-width: none;
+    min-width: 0;
+  }
+}
+
+/* Tabla - MEJORADO PARA CENTRAR COLUMNAS */
+.table-wrapper {
+  flex: 1;
+  overflow: auto;
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+
+  /* Scroll horizontal en móviles */
+  @media (max-width: 768px) {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  table-layout: fixed; /* CAMBIO CLAVE: Volver a fixed para control de anchos */
+  overflow: hidden;
+
+  @media (max-width: 768px) {
+    min-width: 500px;
+    table-layout: auto;
+  }
+
+  @media (max-width: 480px) {
+    min-width: 450px;
+  }
+}
+
+.header-row, .table thead th {
+  background-color: #000000;
+  color: white;
+  font-weight: 500;
+  padding: 12px 16px;
+  text-align: center; /* CENTRAR HEADERS */
+  border: none;
+  white-space: nowrap;
+
+  @media (max-width: 768px) {
+    padding: 10px 12px;
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 8px 10px;
+    font-size: 0.85rem;
+  }
+}
+
+/* ANCHOS OPTIMIZADOS PARA COLUMNAS MÁS CENTRADAS */
+.table thead th:first-child {
+  border-top-left-radius: 12px;
+  width: 80px; /* ID - un poco más de espacio */
+
+  @media (max-width: 768px) {
+    width: 70px;
+  }
+}
+
+.table thead th:nth-child(2) {
+  width: 40%; /* NOMBRE - porcentaje para que se adapte */
+  min-width: 150px;
+}
+
+.table thead th:nth-child(3) {
+  width: 100px; /* ESTADO - tamaño fijo apropiado */
+
+  @media (max-width: 768px) {
+    width: 90px;
+  }
+}
+
+.table thead th:last-child {
+  border-top-right-radius: 12px;
+  width: 180px; /* ACCIONES - espacio suficiente para todos los botones */
+
+  @media (max-width: 768px) {
+    width: 160px;
+  }
+
+  @media (max-width: 480px) {
+    width: 140px;
+  }
+}
+
+.table tbody td {
+  padding: 12px 16px;
+  border: none;
+  vertical-align: middle;
+  text-align: center; /* CENTRAR CONTENIDO DE CELDAS */
+  transition: background-color 0.2s ease;
+
+  @media (max-width: 768px) {
+    padding: 10px 12px;
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 8px 10px;
+    font-size: 0.85rem;
+  }
+}
+
+/* Alineación especial para la columna de nombre (izquierda) */
+.table tbody td:nth-child(2) {
+  text-align: left;
+  padding-left: 24px; /* Más padding izquierdo para que no se vea pegado */
+}
+
+/* Alineación del header NOMBRE para que coincida con los datos */
+.table thead th:nth-child(2) {
+  text-align: left !important; /* Alinear header a la izquierda como los datos */
+  padding-left: 24px; /* Mismo padding que los datos */
+}
+
+.table tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+.table tbody tr:hover {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+.table tbody tr.alt-row td {
+  background-color: #f0efef !important;
+}
+
+/* Acciones - CENTRADAS Y COMPACTAS */
+.acciones {
+  display: flex;
+  gap: 8px; 
+  align-items: center;
+  justify-content: center; /* Centradas */
+  flex-wrap: nowrap;
+  min-width: fit-content;
+
+  @media (max-width: 768px) {
+    gap: 6px;
+  }
+
+  @media (max-width: 480px) {
+    gap: 4px;
+  }
+}
+
+.btn-accion {
+  width: 32px;
+  height: 32px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+
+  .mat-icon {
+    font-size: 16px;
+    height: 16px;
+    width: 16px;
+    line-height: 16px;
+  }
+
+  @media (max-width: 768px) {
+    width: 28px;
+    height: 28px;
+
+    .mat-icon {
+      font-size: 14px;
+      height: 14px;
+      width: 14px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    width: 26px;
+    height: 26px;
+
+    .mat-icon {
+      font-size: 12px;
+      height: 12px;
+      width: 12px;
+    }
+  }
+}
+
+.btn-accion:hover {
+  background-color: rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);
+}
+
+.btn-ir {
+  background-color: #000000;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0 12px;
+  height: 28px;
+  font-size: 11px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  white-space: nowrap;
+
+  @media (max-width: 768px) {
+    padding: 0 8px;
+    height: 26px;
+    font-size: 10px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0 6px;
+    height: 24px;
+    font-size: 9px;
+  }
+}
+
+.btn-ir:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  transform: translateY(-1px);
+}
+
+/* SPINNER */
+.three-body {
+  --uib-size: 35px;
+  --uib-speed: 0.8s;
+  --uib-color: #007BFF;
+  position: relative;
+  display: inline-block;
+  height: var(--uib-size);
+  width: var(--uib-size);
+  animation: spin78236 calc(var(--uib-speed) * 2.5) infinite linear;
+
+  @media (max-width: 480px) {
+    --uib-size: 30px;
+  }
+}
+
+.three-body__dot {
+  position: absolute;
+  height: 100%;
+  width: 30%;
+}
+
+.three-body__dot:after {
+  content: '';
+  position: absolute;
+  height: 0%;
+  width: 100%;
+  padding-bottom: 100%;
+  background-color: var(--uib-color);
+  border-radius: 50%;
+}
+
+.three-body__dot:nth-child(1) {
+  bottom: 5%;
+  left: 0;
+  transform: rotate(60deg);
+  transform-origin: 50% 85%;
+}
+
+.three-body__dot:nth-child(1)::after {
+  bottom: 0;
+  left: 0;
+  animation: wobble1 var(--uib-speed) infinite ease-in-out;
+  animation-delay: calc(var(--uib-speed) * -0.3);
+}
+
+.three-body__dot:nth-child(2) {
+  bottom: 5%;
+  right: 0;
+  transform: rotate(-60deg);
+  transform-origin: 50% 85%;
+}
+
+.three-body__dot:nth-child(2)::after {
+  bottom: 0;
+  left: 0;
+  animation: wobble1 var(--uib-speed) infinite
+     calc(var(--uib-speed) * -0.15) ease-in-out;
+}
+
+.three-body__dot:nth-child(3) {
+  bottom: -5%;
+  left: 0;
+  transform: translateX(116.666%);
+}
+
+.three-body__dot:nth-child(3)::after {
+  top: 0;
+  left: 0;
+  animation: wobble2 var(--uib-speed) infinite ease-in-out;
+}
+
+@keyframes spin78236 {
+  0% {
+   transform: rotate(0deg);
+  }
+
+  100% {
+   transform: rotate(360deg);
+  }
+}
+
+@keyframes wobble1 {
+  0%,
+   100% {
+   transform: translateY(0%) scale(1);
+   opacity: 1;
+  }
+
+  50% {
+   transform: translateY(-66%) scale(0.65);
+   opacity: 0.8;
+  }
+}
+
+@keyframes wobble2 {
+  0%,
+   100% {
+   transform: translateY(0%) scale(1);
+   opacity: 1;
+  }
+
+  50% {
+   transform: translateY(66%) scale(0.65);
+   opacity: 0.8;
+  }
+}
+
+/* Loading container responsive */
+.d-flex.justify-content-center.align-items-center.my-5 {
+  @media (max-width: 480px) {
+    margin-top: 2rem !important;
+    margin-bottom: 2rem !important;
+  }
+}
+
+
+
+
+
+
+
+
+/* ------- */

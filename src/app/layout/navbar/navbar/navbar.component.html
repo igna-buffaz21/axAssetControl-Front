@@ -1,0 +1,57 @@
+<mat-toolbar class="navbar mat-elevation-z5">
+    <!-- Secciones de navegación a la izquierda -->
+    <div class="nav-left">
+        <div class="user-profile">
+            <span class="material-icons user-icon">account_circle</span>
+        </div>
+        
+        @if (rol != 'superadmin') {
+            <!-- Botones para desktop -->
+            <div class="nav-buttons-desktop">
+                <button [routerLink]="['/home']" mat-raised-button class="nav-button">Menú</button>
+                <button [routerLink]="['/asset-management/locations']" mat-button class="nav-button">Gestión</button>
+                <button [routerLink]="['/reports/menu']" mat-button class="nav-button">Informes</button>
+                <button [routerLink]="['/users-management']" mat-button class="nav-button">Usuarios</button>
+            </div>
+
+            <!-- Botón hamburguesa para móvil -->
+            <button class="menu-toggle" (click)="toggleMobileMenu()" mat-icon-button>
+                <mat-icon>menu</mat-icon>
+            </button>
+        }
+    </div>
+
+    <span class="example-spacer"></span>
+
+    <!-- Sección derecha: perfil y logout -->
+    <div class="nav-right">
+        <h1 class="project-name">axAssetControl</h1>
+    </div>
+
+    <!-- Menú desplegable móvil -->
+    @if (rol != 'superadmin') {
+        <div class="mobile-menu" [class.show]="mobileMenuOpen">
+            <button class="mobile-menu-item" [routerLink]="['/home']" (click)="closeMobileMenu()">
+                <mat-icon>home</mat-icon>
+                <span>Menú</span>
+            </button>
+            <button class="mobile-menu-item" [routerLink]="['/asset-management/locations']" (click)="closeMobileMenu()">
+                <mat-icon>business</mat-icon>
+                <span>Gestión</span>
+            </button>
+            <button class="mobile-menu-item" [routerLink]="['/reports/menu']" (click)="closeMobileMenu()">
+                <mat-icon>assessment</mat-icon>
+                <span>Informes</span>
+            </button>
+            <button class="mobile-menu-item" [routerLink]="['/users-management']" (click)="closeMobileMenu()">
+                <mat-icon>people</mat-icon>
+                <span>Usuarios</span>
+            </button>
+        </div>
+    }
+</mat-toolbar>
+
+<!-- Overlay para cerrar el menú -->
+@if (mobileMenuOpen) {
+    <div class="mobile-menu-overlay" (click)="closeMobileMenu()"></div>
+}

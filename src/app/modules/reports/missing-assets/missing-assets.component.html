@@ -1,0 +1,70 @@
+<app-skeleton>
+    <div class="container-fluid p-3">
+      <div class="d-flex align-items-center mb-3">
+        <!-- Grupo izquierdo: Botón volver, título y selectores -->
+        <div class="d-flex align-items-center flex-grow-1">
+          <button [routerLink]="['/reports/menu']" class="back-button">
+            <i class="arrow-left"></i>
+          </button>
+          <h2 class="titulo-locaciones me-4">Activos Extraviados</h2>          
+        </div>
+        
+        <!-- Grupo derecho: Filtrar, Buscar y Agregar -->
+        <div class="d-flex align-items-center">
+          <select #sel="ngModel" class="form-select custom-select" style="margin-right: 10px;" [(ngModel)]="filtro" (change)="OrdenarControles(sel.value);">
+            <option value="" disabled selected>Filtrar</option> 
+            <option value="subsector-asc">Subsector (A-Z)</option>
+            <option value="subsector-desc">Subsector (Z-A)</option>
+            <option value="auditor-asc">Auditor (A-Z)</option>
+            <option value="auditor-desc">Auditor (Z-A)</option>
+          </select>          
+          <div class="position-relative me-3">
+            <input [formControl]="searchControl" type="text" class="form-control buscar-input" placeholder="Buscar por nombre...">
+          </div>
+        </div>
+      </div>
+      
+      @if (isLoading) {
+        <div class="d-flex justify-content-center align-items-center my-5">
+          <!-- From Uiverse.io by G4b413l --> 
+          <div class="three-body">
+            <div class="three-body__dot"></div>
+            <div class="three-body__dot"></div>
+            <div class="three-body__dot"></div>
+          </div>
+        </div>
+      }
+
+      @if (!isLoading) {
+      <div class="table-wrapper">
+          <table class="table">
+            <thead>
+              <tr class="header-row">
+                <th>SUBSECTOR</th>
+                <th>NOMBRE</th>
+                <th>MARCA</th>
+                <th>TAG RFID</th>
+                <th>AUDITORIA</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (control of controles; track $index) {  
+                <tr class="control-header">
+                  <td colspan="5">CONTROL #{{ control.id }} - {{ control.idSubsectorNavigation.name }}/{{control.idSubsectorNavigation.idSectorNavigation.name}}</td>
+                </tr>
+                @for (detail of control.detailControls; track $index) {
+                  <tr [class.row-perdido]="detail.status === 'notAvailable'">
+                    <td>{{control.idSubsectorNavigation.name}}</td>
+                    <td>{{ detail.idActivoNavigation.name }}</td>
+                    <td>{{ detail.idActivoNavigation.brand }}</td>
+                    <td>{{ detail.idActivoNavigation.tagRfid }}</td>
+                    <td>{{ detail.idAuditorNavigation.name }}</td>
+                  </tr>
+                }
+              }
+            </tbody>
+          </table>
+      </div>
+      }
+    </div>
+  </app-skeleton>

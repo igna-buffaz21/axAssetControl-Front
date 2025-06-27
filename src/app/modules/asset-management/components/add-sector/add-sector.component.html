@@ -1,0 +1,39 @@
+<app-skeleton>
+    <!-- location-create.component.html -->
+    <div class="location-create-wrapper">
+        <div class="back-button-container">
+          <button [routerLink]="['/asset-management/sector/', idLocacion]" class="back-button" >
+            <i class="arrow-left"></i>
+          </button>
+        </div>
+      
+        <div class="location-create-container">
+          <div class="location-create-card">
+            <h2 class="location-create-title">Crear Nuevo Sector</h2>
+            
+            <form [formGroup]="locationForm" (ngSubmit)="CrearSector()">
+              <div class="input-container">
+                <label for="locationName">Nombre del sector</label>
+                <input id="locationName" type="text" class="form-control" formControlName="name" placeholder="Ingrese el nombre">
+                @if(locationForm.get('name')?.invalid && (locationForm.get('name')?.dirty || locationForm.get('name')?.touched)) {
+                  <div class="error-message">
+                    @if(locationForm.get('name')?.errors?.['required']) {
+                      <span>El nombre es obligatorio</span>
+                    }
+                    @if(locationForm.get('name')?.errors?.['minlength']) {
+                      <span>El nombre debe tener al menos 3 caracteres</span>
+                    }
+                  </div>
+                }
+              </div>
+              
+              <div class="button-container">
+                <button type="submit" [disabled]="locationForm.invalid" class="create-button">
+                  Crear Sector
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </app-skeleton>

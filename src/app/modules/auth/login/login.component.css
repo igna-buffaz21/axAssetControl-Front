@@ -1,0 +1,211 @@
+/* login.component.scss */
+.login-container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f5f5; /* Fondo gris claro */
+  overflow: hidden;
+  /* Agregamos padding para móviles */
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 380px;
+  background-color: white; /* Contenedor blanco */
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  padding: 32px 24px;
+  transform: translateY(0);
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-1px);
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    max-width: 420px; /* Más pequeño en tablets */
+    padding: 24px 20px;
+  }
+
+  @media (max-width: 480px) {
+    max-width: 380px; /* Aún más pequeño en móviles */
+    padding: 20px 16px;
+  }
+
+  @media (max-width: 360px) {
+    max-width: 360px; /* Para móviles muy pequeños */
+    padding: 16px 12px;
+  }
+}
+
+.login-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 32px;
+
+  h1 {
+    color: #333;
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0 0 6px;
+  }
+
+  p {
+    color: #666;
+    margin: 0;
+    font-size: 14px;
+  }
+
+  /* Responsive text sizes */
+  @media (max-width: 480px) {
+    margin-bottom: 24px;
+    
+    h1 {
+      font-size: 22px;
+    }
+    
+    p {
+      font-size: 13px;
+    }
+  }
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 16px;
+
+  ::ng-deep .mat-mdc-form-field-subscript-wrapper {
+    height: 24px !important;
+  }
+
+  /* Ajustes para móviles */
+  @media (max-width: 480px) {
+    margin-bottom: 12px;
+  }
+}
+
+.error-message {
+  background-color: #fee8e7;
+  color: #d32f2f;
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin-bottom: 24px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+
+  mat-icon {
+    margin-right: 8px;
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 10px 12px;
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+}
+
+.login-button {
+  width: 100%;
+  height: 48px;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 500;
+  position: relative;
+  overflow: hidden;
+  background-color: #212121 !important; /* Botón negro */
+  color: white;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
+  }
+
+  &:focus:not(:active)::after {
+    animation: ripple 1s ease-out;
+  }
+
+  &:disabled {
+    background-color: #9e9e9e; /* Gris cuando está deshabilitado */
+  }
+
+  &:hover:not(:disabled) {
+    background-color: #000000; /* Negro más oscuro al pasar el mouse */
+  }
+
+  /* Ajustes para móviles */
+  @media (max-width: 480px) {
+    height: 44px;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+  }
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0, 0);
+    opacity: 0.5;
+  }
+  20% {
+    transform: scale(25, 25);
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(40, 40);
+  }
+}
+
+/* Asegura que el spinner esté centrado y con el tamaño correcto */
+mat-spinner {
+  margin: 0 auto;
+
+  ::ng-deep circle {
+    stroke: white !important;
+  }
+}
+
+.forgot-password {
+  text-align: center;
+  margin-top: 16px;
+  cursor: pointer;
+
+  a {
+    color: #1976d2;
+    text-decoration: none;
+    font-size: 14px;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+
+  @media (max-width: 480px) {
+    margin-top: 12px;
+    
+    a {
+      font-size: 13px;
+    }
+  }
+}

@@ -1,0 +1,8 @@
+.full-width {
+    width: 100%;
+  }
+  
+  :host ::ng-deep .mat-dialog-container {
+    border-radius: 8px;
+  }
+  

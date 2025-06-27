@@ -1,0 +1,116 @@
+<app-skeleton>
+<!-- location-create.component.html -->
+<div class="location-create-wrapper">
+    <div class="back-button-container">
+      <button [routerLink]="['/asset-management/assets/', idSubSector]" class="back-button">
+        <i class="arrow-left"></i> 
+      </button>
+    </div>
+  
+    <div class="location-create-container">
+      <div class="location-create-card">
+        <h2 class="location-create-title">Crear Nuevo Activo</h2>
+        
+        <form [formGroup]="locationForm" (ngSubmit)="CrearActivo()">
+          <div class="form-grid">
+            <div class="input-container">
+              <label for="assetName">Nombre</label>
+              <input id="assetName" type="text" class="form-control" formControlName="name" placeholder="Ingrese el nombre">
+              @if(locationForm.get('name')?.invalid && (locationForm.get('name')?.dirty || locationForm.get('name')?.touched)) {
+                <div class="error-message">
+                  @if(locationForm.get('name')?.errors?.['required']) {
+                    <span>El nombre es obligatorio</span>
+                  }
+                  @if(locationForm.get('name')?.errors?.['minlength']) {
+                    <span>El nombre debe tener al menos 3 caracteres</span>
+                  }
+                </div>
+              }
+            </div>
+  
+            <div class="input-container">
+              <label for="assetBrand">Marca</label>
+              <input id="assetBrand" type="text" class="form-control" formControlName="brand" placeholder="Ingrese la marca">
+              @if(locationForm.get('brand')?.invalid && (locationForm.get('brand')?.dirty || locationForm.get('brand')?.touched)) {
+                <div class="error-message">
+                  @if(locationForm.get('brand')?.errors?.['required']) {
+                    <span>La marca es obligatoria</span>
+                  }
+                  @if(locationForm.get('brand')?.errors?.['minlength']) {
+                    <span>La marca debe tener al menos 2 caracteres</span>
+                  }
+                </div>
+              }
+            </div>
+  
+            <div class="input-container">
+              <label for="assetModel">Modelo</label>
+              <input id="assetModel" type="text" class="form-control" formControlName="model" placeholder="Ingrese el modelo">
+              @if(locationForm.get('model')?.invalid && (locationForm.get('model')?.dirty || locationForm.get('model')?.touched)) {
+                <div class="error-message">
+                  @if(locationForm.get('model')?.errors?.['required']) {
+                    <span>El modelo es obligatorio</span>
+                  }
+                  @if(locationForm.get('model')?.errors?.['minlength']) {
+                    <span>El modelo debe tener al menos 2 caracteres</span>
+                  }
+                </div>
+              }
+            </div>
+  
+            <div class="input-container">
+              <label for="assetSerial">Número de serie</label>
+              <input id="assetSerial" type="text" class="form-control" formControlName="serialNumber" placeholder="Ingrese el número de serie">
+              @if(locationForm.get('serialNumber')?.invalid && (locationForm.get('serialNumber')?.dirty || locationForm.get('serialNumber')?.touched)) {
+                <div class="error-message">
+                  @if(locationForm.get('serialNumber')?.errors?.['required']) {
+                    <span>El número de serie es obligatorio</span>
+                  }
+                  @if(locationForm.get('serialNumber')?.errors?.['pattern']) {
+                    <span>El número de serie debe ser alfanumérico</span>
+                  }
+                </div>
+              }
+            </div>
+
+            <div class="input-container">
+              <label for="assetType">Tipo de Activo</label>
+              <input id="assetType" type="number" class="form-control" formControlName="assetType" placeholder="Ingrese el Tipo de Activo">
+              @if(locationForm.get('assetType')?.invalid && (locationForm.get('assetType')?.dirty || locationForm.get('assetType')?.touched)) {
+                <div class="error-message">
+                  @if(locationForm.get('assetType')?.errors?.['required']) {
+                    <span>El Tipo de activo es obligatorio</span>
+                  }
+                  @if(locationForm.get('assetType')?.errors?.['pattern']) {
+                    <span>El Tipo de activo ser alfanumérico</span>
+                  }
+                </div>
+              }
+            </div>
+
+            <div class="input-container">
+              <label for="cantity">Cantidad</label>
+              <input id="cantity" type="number" class="form-control" formControlName="cantity" placeholder="Ingrese la cantidad">
+              @if(locationForm.get('cantity')?.invalid && (locationForm.get('cantity')?.dirty || locationForm.get('cantity')?.touched)) {
+                <div class="error-message">
+                  @if(locationForm.get('cantity')?.errors?.['required']) {
+                    <span>La cantidad es obligatoria</span>
+                  }
+                  @if(locationForm.get('cantity')?.errors?.['pattern']) {
+                    <span>La cantidad debe ser numerica</span>
+                  }
+                </div>
+              }
+            </div>
+            
+            <div class="button-container">
+              <button type="submit" [disabled]="locationForm.invalid" class="create-button">
+                Crear Activo
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</app-skeleton>

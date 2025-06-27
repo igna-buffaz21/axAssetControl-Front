@@ -1,0 +1,16 @@
+<div 
+      *ngIf="visible"
+      [ngClass]="['toast-container', toast?.type]"
+      [class.slide-in]="visible && showAnimation"
+      [class.slide-out]="!showAnimation">
+    <div class="toast-icon">
+        <i *ngIf="toast?.type === 'success'" class="success-icon"></i>
+        <i *ngIf="toast?.type === 'error'" class="error-icon"></i>
+        <i *ngIf="toast?.type === 'info'" class="info-icon"></i>
+        <i *ngIf="toast?.type === 'warning'" class="warning-icon"></i>
+        </div>
+      <div class="toast-content">
+        <p>{{ toast?.message }}</p>
+    </div>
+    <div class="progress-bar" [style.animation-duration.ms]="toast?.duration"></div>
+</div>

@@ -1,0 +1,19 @@
+
+/* *:hover{
+    background-color: var(--color4) !important;
+} */
+
+*{
+    font-size: 1rem !important;
+}
+
+mat-tree-node{
+    color: var(--color6);
+    background-color: var(--color3);
+}
+/* Asi se seleccionan todos los elementos dentro de una etiqueta. */
+mat-tree-node:hover,
+mat-tree-node:hover > *{
+    color: var(--color6);
+    background-color: var(--color4);
+}

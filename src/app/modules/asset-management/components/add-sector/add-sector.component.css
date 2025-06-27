@@ -1,0 +1,126 @@
+/* location-create.component.css */
+:host {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .location-create-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .back-button-container {
+    padding: 20px 20px 0 20px;
+  }
+  
+  .back-button {
+    background-color: #ffffffc8; /* Fondo sutil del color corporativo */
+    border: none; /* Sin borde */
+    width: 35px; /* Ancho del botón */
+    height: 35px; /* Alto del botón */
+    border-radius: 10px; /* Bordes redondeados */
+    margin-right: 10px; /* Espacio derecho */
+    cursor: pointer; /* Manito al pasar el ratón */
+    display: flex; /* Usar flexbox para centrar el icono */
+    align-items: center; /* Centrar el icono verticalmente */
+    justify-content: center; /* Centrar el icono horizontalmente */
+    padding: 0; /* Sin padding */
+    transition: all 0.2s ease; /* Transición suave */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+  }
+  
+  .back-button:hover {
+    background-color: rgba(0, 0, 0, 0.15); /* Fondo al pasar el ratón */
+    transform: translateX(-2px); /* Desplazamiento horizontal */
+  }
+  
+  .arrow-left {
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-top: 2px solid #000000;   /* Línea superior de la flecha */
+    border-left: 2px solid #000000;  /* Línea izquierda de la flecha */
+    transform: rotate(-45deg);       /* Rota los bordes para formar una flecha hacia la izquierda */
+  }
+  
+  .location-create-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    flex: 1;
+    padding: 20px;
+  }
+  
+  .location-create-card {
+    background-color: #f2f2f2;
+    border-radius: 8px;
+    padding: 30px;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .location-create-title {
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 24px;
+    color: #333;
+    text-align: center;
+  }
+  
+  .input-container {
+    margin-bottom: 20px;
+    width: 100%;
+  }
+  
+  .input-container label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  .error-message {
+    color: #d32f2f;
+    font-size: 12px;
+    margin-top: 4px;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .create-button {
+    background-color: #000000;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 12px 24px;
+    font-size: 16px;
+    min-width: 150px;
+    cursor: pointer;
+  }
+  
+  .create-button:hover {
+    background-color: #000000;
+  }
+  
+  .create-button:disabled {
+    background-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
+  }
+
