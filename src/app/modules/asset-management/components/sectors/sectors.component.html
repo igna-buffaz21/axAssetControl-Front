@@ -44,25 +44,30 @@
         @for (sector of sectores; track $index) {
           <div class="col-md-6 col-lg-4">
             <div [class]="'locacion-card ' + (status ? 'activa' : 'inactiva')" (click)="navegarASubsectores(sector.id)">
-              <h3 class="locacion-titulo">{{ sector.id }}</h3>
-              <div class="locacion-direccion">{{ sector.name }}</div>
+              
+              <!-- Espaciador antes del título -->
+              <div style="height: 40px;"></div>
+          
+              <h3 class="locacion-titulo">{{ sector.name }}</h3>
+          
               @if (datosUsuario.role === 'admin') {
-              <div class="card-actions">
-                <button mat-icon-button class="action-button edit-button" (click)="editarSector(sector.id, sector.name); $event.stopPropagation()">
-                  <mat-icon>edit</mat-icon>
-                </button>
-                <button mat-icon-button class="action-button delete-button" (click)="eliminarSectorConConfirmacion(sector.id, sector.name); $event.stopPropagation()">
-                  @if (status) {
-                    <mat-icon>visibility_off</mat-icon>
-                  }
-                  @else {
-                    <mat-icon>visibility_on</mat-icon>
-                  }
-                </button>
-              </div>
-            }
+                <div class="card-actions">
+                  <button mat-icon-button class="action-button edit-button" (click)="editarSector(sector.id, sector.name); $event.stopPropagation()">
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                  <button mat-icon-button class="action-button delete-button" (click)="eliminarSectorConConfirmacion(sector.id, sector.name); $event.stopPropagation()">
+                    @if (status) {
+                      <mat-icon>visibility_off</mat-icon>
+                    }
+                    @else {
+                      <mat-icon>visibility_on</mat-icon>
+                    }
+                  </button>
+                </div>
+              }
             </div>
           </div>
+          
         }
       }
     </div>

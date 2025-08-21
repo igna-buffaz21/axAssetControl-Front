@@ -113,12 +113,6 @@ export class SubsectorsComponent {
             label: 'Nombre del subsector',
             value: name,
             validators: [Validators.required, Validators.minLength(3)]
-          },
-          {
-            name: 'tagRfid',
-            label: 'Tag RFID',
-            value: tagRfid,
-            validators: [Validators.required, Validators.minLength(1)]
           }
         ]
       },
@@ -128,8 +122,7 @@ export class SubsectorsComponent {
       if (result) {
         const locationData = {
           id: id,
-          name: result.name,
-          tagRfid: result.tagRfid,
+          name: result.name
         }
         console.log(result)
         console.log(locationData);

@@ -176,25 +176,19 @@ export class AssetsComponent {
             name: 'brand',
             label: 'Marca del activo',
             value: brand,
-            validators: [Validators.required, Validators.minLength(3)]
+            validators: [Validators.minLength(0)]
           },
           {
             name: 'model',
             label: 'Modelo del activo',
             value: model,
-            validators: [Validators.required, Validators.minLength(3)]
+            validators: [Validators.minLength(0)]
           },
           {
             name: 'seriaNumber',
             label: 'Numero de serie del activo',
             value: seriaNumber,
-            validators: [Validators.required, Validators.minLength(3)]
-          },
-          {
-            name: 'idActiveType',
-            label: 'Tipo de activo',
-            value: idActiveType,
-            validators: [Validators.required, Validators.minLength(1)]
+            validators: [Validators.minLength(0)]
           }
         ]
       },

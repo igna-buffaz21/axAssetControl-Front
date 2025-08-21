@@ -33,4 +33,8 @@ export class CompanyService {
 
     return this.http.put(API_ROUTES.COMPANY.EDIT_COMPANY, body);
   }
+
+  obtenerNombreEmpresaPorId(id: number) : Observable<any> {
+    return this.http.get<any>(API_ROUTES.COMPANY.GET_NAME(id));
+  }
  }

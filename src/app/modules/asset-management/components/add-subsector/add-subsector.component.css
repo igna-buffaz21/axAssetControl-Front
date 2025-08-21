@@ -104,7 +104,7 @@
   }
   
   .create-button {
-    background-color: #721c43;
+    background-color: #000000;
     color: white;
     border: none;
     border-radius: 4px;
@@ -115,7 +115,7 @@
   }
   
   .create-button:hover {
-    background-color: #8a2250;
+    background-color: #000000;
   }
   
   .create-button:disabled {

@@ -14,7 +14,22 @@
             <form [formGroup]="locationForm" (ngSubmit)="CrearSector()">
               <div class="input-container">
                 <label for="locationName">Nombre del sector</label>
-                <input id="locationName" type="text" class="form-control" formControlName="name" placeholder="Ingrese el nombre">
+                <input
+                id="locationName"
+                type="text"
+                matInput
+                formControlName="name" 
+                [matAutocomplete]="auto"
+                class="form-control" 
+                formControlName="name" 
+                placeholder="Ingrese el nombre">
+
+                <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option *ngFor="let opcion of opcionesFiltradas | async" [value]="opcion">
+                    {{ opcion }}
+                  </mat-option>
+                </mat-autocomplete>
+
                 @if(locationForm.get('name')?.invalid && (locationForm.get('name')?.dirty || locationForm.get('name')?.touched)) {
                   <div class="error-message">
                     @if(locationForm.get('name')?.errors?.['required']) {

@@ -13,9 +13,26 @@
         
         <form [formGroup]="locationForm" (ngSubmit)="CrearActivo()">
           <div class="form-grid">
+
+
             <div class="input-container">
               <label for="assetName">Nombre</label>
-              <input id="assetName" type="text" class="form-control" formControlName="name" placeholder="Ingrese el nombre">
+              <input
+              id="assetName" 
+              type="text" 
+              class="form-control" 
+              matInput
+              formControlName="name" 
+              [matAutocomplete]="auto"
+              placeholder="Ingrese el nombre">
+
+              <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let opcion of opcionesFiltradas | async" [value]="opcion">
+                  {{ opcion }}
+                </mat-option>
+              </mat-autocomplete>
+              
+
               @if(locationForm.get('name')?.invalid && (locationForm.get('name')?.dirty || locationForm.get('name')?.touched)) {
                 <div class="error-message">
                   @if(locationForm.get('name')?.errors?.['required']) {
@@ -30,7 +47,21 @@
   
             <div class="input-container">
               <label for="assetBrand">Marca</label>
-              <input id="assetBrand" type="text" class="form-control" formControlName="brand" placeholder="Ingrese la marca">
+              <input
+              id="assetBrand" 
+              type="text" 
+              matInput 
+              class="form-control" 
+              formControlName="brand" 
+              [matAutocomplete]="autoMarca"
+              placeholder="Ingrese la marca">
+
+              <mat-autocomplete #autoMarca="matAutocomplete">
+                <mat-option *ngFor="let marca of opcionesFiltradasMarca | async" [value]="marca">
+                  {{ marca }}
+                </mat-option>
+              </mat-autocomplete>
+
               @if(locationForm.get('brand')?.invalid && (locationForm.get('brand')?.dirty || locationForm.get('brand')?.touched)) {
                 <div class="error-message">
                   @if(locationForm.get('brand')?.errors?.['required']) {
@@ -45,7 +76,14 @@
   
             <div class="input-container">
               <label for="assetModel">Modelo</label>
-              <input id="assetModel" type="text" class="form-control" formControlName="model" placeholder="Ingrese el modelo">
+              <input
+              id="assetModel"
+              type="text"
+              autocomplete="off"
+              class="form-control"
+              formControlName="model"
+              placeholder="Ingrese el modelo">
+
               @if(locationForm.get('model')?.invalid && (locationForm.get('model')?.dirty || locationForm.get('model')?.touched)) {
                 <div class="error-message">
                   @if(locationForm.get('model')?.errors?.['required']) {
@@ -60,7 +98,13 @@
   
             <div class="input-container">
               <label for="assetSerial">Número de serie</label>
-              <input id="assetSerial" type="text" class="form-control" formControlName="serialNumber" placeholder="Ingrese el número de serie">
+              <input
+               id="assetSerial"
+                type="text"
+                class="form-control" 
+                formControlName="serialNumber"
+                autocomplete="off"
+                placeholder="Ingrese el número de serie">
               @if(locationForm.get('serialNumber')?.invalid && (locationForm.get('serialNumber')?.dirty || locationForm.get('serialNumber')?.touched)) {
                 <div class="error-message">
                   @if(locationForm.get('serialNumber')?.errors?.['required']) {
@@ -74,19 +118,21 @@
             </div>
 
             <div class="input-container">
-              <label for="assetType">Tipo de Activo</label>
-              <input id="assetType" type="number" class="form-control" formControlName="assetType" placeholder="Ingrese el Tipo de Activo">
+              <label for="assetMaterial">Tipo de Activo</label>
+              <select id="assetMaterial" class="form-control" formControlName="assetType">
+                <option value="" disabled selected>Seleccione el tipo de activo</option>
+                <option value="1">Metálico</option>
+                <option value="2">No metálico</option>
+              </select>
               @if(locationForm.get('assetType')?.invalid && (locationForm.get('assetType')?.dirty || locationForm.get('assetType')?.touched)) {
                 <div class="error-message">
                   @if(locationForm.get('assetType')?.errors?.['required']) {
                     <span>El Tipo de activo es obligatorio</span>
                   }
-                  @if(locationForm.get('assetType')?.errors?.['pattern']) {
-                    <span>El Tipo de activo ser alfanumérico</span>
-                  }
                 </div>
               }
             </div>
+            
 
             <div class="input-container">
               <label for="cantity">Cantidad</label>

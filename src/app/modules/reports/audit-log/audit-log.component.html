@@ -75,16 +75,6 @@
             </button> 
           </div>
         </div>
-        
-        <!-- Grupo derecho: Filtrar, Buscar y Agregar -->
-        <div class="d-flex align-items-center">
-          <select #sel="ngModel" class="form-select custom-select" style="margin-right: 10px;" [(ngModel)]="filtro" (change)="OrdenarControles(sel.value);">
-            <option value="" disabled selected>Filtrar</option> \
-            <option value="show_all">Mostrar Todos</option>
-            <option value="completed">Completados</option>
-            <option value="inprogress">En progreso</option>
-          </select>    
-        </div>
       </div>
       
       <div class="table-wrapper">
@@ -107,8 +97,13 @@
               @for (control of controlRecord; track $index) {
                 <tr>
                   <td>{{ control.id }}</td>
-                  <td>{{ control.date }}</td>
-                  <td>{{ control.status }}</td>
+                  <td>{{ (+control.date) * 1000 | date:'dd/MM/yyyy HH:mm' }}</td>
+                  @if (control.status == 'inProcces') {
+                    <td>En Proceso</td>
+                  }
+                  @else if (control.status == 'Completed') {
+                    <td>Completado</td>
+                  }
                   <td class="acciones">
                     <button class="btn-ir" (click)="VerInformeDeAuditoria(control.id)">VER INFORME</button>
                   </td>

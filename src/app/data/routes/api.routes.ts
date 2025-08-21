@@ -59,5 +59,6 @@ export const API_ROUTES = {
         CREATE_COMPANY: `${environment.apiUrl}api/Empresa/CrearEmpresa`,
         CHANGE_STATUS: `${environment.apiUrl}api/Empresa/AltaBajaEmpresa`,
         EDIT_COMPANY: `${environment.apiUrl}api/Empresa/ActualizarEmpresa`,
+        GET_NAME: (id: number) => `${environment.apiUrl}api/Empresa/ObtenerNombredeEmpresPorId?id=${id}`
     }
 }

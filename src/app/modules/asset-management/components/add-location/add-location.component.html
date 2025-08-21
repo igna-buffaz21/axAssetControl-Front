@@ -17,7 +17,14 @@
         <form [formGroup]="locationForm" (ngSubmit)="CrearLocacion()">
           <div class="input-container">
             <label for="locationName">Direccion de la locación</label>
-            <input id="locationName" type="text" class="form-control" formControlName="name" placeholder="Ingrese la direccion">
+            <input 
+            id="locationName" 
+            type="text" 
+            class="form-control" 
+            formControlName="name" 
+            autocomplete="off"
+            placeholder="Ingrese la direccion">
+
             @if(locationForm.get('name')?.invalid && (locationForm.get('name')?.dirty || locationForm.get('name')?.touched)) {
               <div class="error-message">
                 @if(locationForm.get('name')?.errors?.['required']) {

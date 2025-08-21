@@ -10,16 +10,57 @@ import { EstadosNavegacionService } from '../../../../data/services/estados-nave
 import { SectorService } from '../../../../data/services/sector.service';
 import { ToastService } from '../../../../data/services/toast.service';
 import { AuthService } from '../../../../data/services/auth.service';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { NgFor } from '@angular/common';
+import { map, Observable, startWith } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-add-sector',
-  imports: [SkeletonComponent, MatButtonModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, RouterModule],
+  imports: [SkeletonComponent, MatButtonModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, RouterModule, MatAutocompleteModule, MatSelectModule, AsyncPipe, NgFor],
   templateUrl: './add-sector.component.html',
   styleUrl: './add-sector.component.css'
 })
 export class AddSectorComponent {
   locationForm: FormGroup;
   idLocacion!: any | null;
+
+  opciones: string[] = [
+    'Planta Baja',
+    'Primer Piso',
+    'Segundo Piso',
+    'Tercer Piso',
+    'Cuarto Piso',
+    'Sótano',
+    'Mezanine',
+    'Ala Norte',
+    'Ala Sur',
+    'Ala Este',
+    'Ala Oeste',
+    'Edificio A',
+    'Edificio B',
+    'Edificio C',
+    'Bloque 1',
+    'Bloque 2',
+    'Bloque 3',
+    'Zona Administrativa',
+    'Zona Operativa',
+    'Zona Comercial',
+    'Zona de Producción',
+    'Zona de Almacenamiento',
+    'Zona de Carga y Descarga',
+    'Zona de Estacionamiento',
+    'Zona de Seguridad',
+    'Zona de Mantenimiento',
+    'Zona Exterior',
+    'Zona Verde',
+    'Zona de Servicios'
+  ];
+  
+
+  opcionesFiltradas!: Observable<string[]>;
+
 
   constructor( private authService: AuthService,private fb: FormBuilder, private estadoNavegacionService: EstadosNavegacionService, private sectorService: SectorService, private toastService: ToastService) {
     this.locationForm = this.fb.group({
@@ -31,8 +72,19 @@ export class AddSectorComponent {
     console.clear();
 
     this.idLocacion = this.estadoNavegacionService.getLocationId()
+
+    this.opcionesFiltradas = this.locationForm.get('name')!.valueChanges.pipe(
+      startWith(''),
+      map(valor => this.filtrar(valor || ''))
+    );
   }
 
+  private filtrar(valor: string): string[] {
+    const filtro = valor.toLowerCase();
+    return this.opciones.filter(opcion =>
+      opcion.toLowerCase().includes(filtro)
+    );
+  }
 
   CrearSector() {
     if (this.locationForm.valid) {

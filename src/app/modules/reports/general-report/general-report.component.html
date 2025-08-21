@@ -116,7 +116,12 @@
                 <td>{{ detail.idActivoNavigation.brand }}</td>
                 <td>{{ detail.idActivoNavigation.tagRfid }}</td>
                 <td>{{detail.idAuditorNavigation.name}}</td>
-                <td>{{detail.status}}</td>
+                @if (detail.status == 'available') {
+                  <td class="text-success">Disponible</td>
+                }
+                @else if (detail.status == 'notAvailable') {
+                  <td class="text-danger">No disponible</td>
+                }
               </tr>
             }
           }

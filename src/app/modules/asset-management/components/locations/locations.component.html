@@ -45,8 +45,11 @@
           @for (locacion of locations; track $index) {
             <div class="col-md-6 col-lg-4">
                 <div [class]="'locacion-card ' + (status ? 'activa' : 'inactiva')" (click)="navegarASectores(locacion.id)">
-                <h3 class="locacion-titulo">{{ locacion.id }}</h3>
-                <div class="locacion-direccion">{{ locacion.name }}</div>
+
+                <div style="height: 40px;"></div>
+
+                <h3 class="locacion-titulo">{{ locacion.name }}</h3>
+
                 @if (datosUsuario.role === 'admin') {
                 <div class="card-actions">
                   <button mat-icon-button class="action-button edit-button" (click)="editarLocacion(locacion.id, locacion.name); $event.stopPropagation()">

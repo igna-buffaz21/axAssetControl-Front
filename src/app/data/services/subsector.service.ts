@@ -29,7 +29,7 @@ export class SubsectorService {
   }
 
   EditarSubsector(data: any) {
-    const body = { id: data.id, name: data.name, tagRfid: data.tagRfid };
+    const body = { id: data.id, name: data.name};
     console.log(body);
 
     return this.http.put(API_ROUTES.SUBSECTOR.EDIT_SUBSECTOR, body);

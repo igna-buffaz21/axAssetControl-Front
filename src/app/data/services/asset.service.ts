@@ -11,7 +11,7 @@ export class AssetService {
   constructor(private http: HttpClient) { }
 
   ObtenerActivos(id: number, idEmpresa: number, status: boolean) : Observable<any> {
-    return this.http.get<any>(API_ROUTES.ASSET.GET_ALL_ASSETS(id, idEmpresa,status));
+    return this.http.get<any>(API_ROUTES.ASSET.GET_ALL_ASSETS(id, idEmpresa, status));
   }
 
   CrearActivo(data: any) : Observable<any> {

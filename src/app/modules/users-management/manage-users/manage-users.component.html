@@ -43,8 +43,23 @@
           @for (user of users; track $index) {
             <tr [class.alt-row]="$index % 2 !== 0">
               <td>{{ user.name }}</td>
-              <td>{{user.rol}}</td>
-              <td>{{user.status}}</td>
+              @if (user.rol == 'admin') {
+                <td>Administrador</td>
+              }
+              @else if (user.rol == 'operator') {
+                <td>Operador</td>
+              }
+              @else if (user.rol == 'superadmin') {
+                <td>Super Administrador</td>
+              }
+
+              @if (user.status == 'actived') {
+                <td>Activo</td>
+              }
+              @else if (user.status == 'disabled') {
+                <td>Inactivo</td>
+              }
+              
               @if (obtenerDatosUsuarios.role === 'admin') {
               <td class="acciones">
                 <button class="btn-accion btn-editar" (click)="EditarUsuario(user.id, user.name)">
