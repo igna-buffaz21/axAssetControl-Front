@@ -1,7 +1,7 @@
 
 export const environment = {
     production: false,
-    apiUrl: 'http://192.168.226.212:5108/'
+    apiUrl: 'http://192.168.226.239:5108/'
 }
 
 //apiUrl: 'https://localhost:7271/'
